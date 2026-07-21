@@ -1,0 +1,44 @@
+schema: spec-driven
+
+context: |
+  Chetna: an app helping Indian parents manage children's screen time (proactive
+  blocking, not just tracking). Full context lives in docs/ (see docs/mkdocs.yml
+  nav) and docs/content/documentation/adr/ for architecture decisions — read
+  those before proposing changes, don't assume this summary is complete.
+
+  Personas (docs/content/brainstorm/v1-feature-set.md): own-device child
+  (tween/teen), toddler/preschooler on a parent-handed device, and (phase 2)
+  older child on a shared/borrowed device.
+
+  Architecture: Clean Architecture + DDD, modular monolith to start (ADR-0004).
+  Bounded contexts live under apps/domains/: consent, enforcement, credits,
+  device. Mobile is Kotlin Multiplatform with native UI per platform (ADR-0003)
+  — Android v1 (Kotlin/Compose), iOS phase 2 (Swift/SwiftUI). Backend is
+  Kotlin/JVM on Spring Boot (ADR-0005), PostgreSQL, REST + OpenAPI, RFC 7807
+  errors. Temporal for workflow orchestration, RabbitMQ as the event bus from
+  day one (ADR-0006). Auth is phone+OTP login plus device pairing for child
+  devices, plain JWT via Spring Security, no separate OAuth2 Authorization
+  Server (ADR-0010). Observability via OpenTelemetry + self-hosted
+  Grafana/Loki/Tempo/Prometheus, with trace-ID correlation across HTTP,
+  Temporal, and RabbitMQ (ADR-0009).
+
+  Non-negotiables: DPDP Act compliance (verifiable guardian consent, no
+  behavioral profiling/tracking of children), emergency calling always works
+  regardless of lock state, fully open-source tooling throughout, TDD (unit +
+  integration + e2e, written before code).
+
+  Environment conventions (CLAUDE.md): never install into host/system Python,
+  always use a venv even inside containers; local dev tooling runs via
+  docker compose, not ad hoc host installs (OpenSpec/Node are a deliberate,
+  documented exception — see ADR-0011 — as an interactive authoring tool, not
+  a build dependency).
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours

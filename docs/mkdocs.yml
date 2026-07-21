@@ -1,0 +1,50 @@
+site_name: Chetna
+site_description: Helping Indian parents manage children's screen time — project documentation, planning, and research.
+docs_dir: content
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Documentation:
+      - documentation/index.md
+      - Architecture Decision Records:
+          - documentation/adr/index.md
+          - ADR-0001 Docs site tooling: documentation/adr/0001-docs-site-tooling.md
+          - ADR-0002 Containerized dev tooling: documentation/adr/0002-containerized-dev-tooling.md
+          - ADR-0003 Mobile architecture: documentation/adr/0003-mobile-architecture.md
+          - ADR-0004 Modular monolith: documentation/adr/0004-modular-monolith.md
+          - ADR-0005 Backend technology stack: documentation/adr/0005-backend-technology-stack.md
+          - ADR-0006 Workflow orchestration: documentation/adr/0006-workflow-orchestration.md
+          - ADR-0007 Web frontend stack: documentation/adr/0007-web-frontend-stack.md
+          - ADR-0008 Mobile design system: documentation/adr/0008-mobile-design-system.md
+          - ADR-0009 Observability: documentation/adr/0009-observability.md
+          - ADR-0010 Authentication and authorization: documentation/adr/0010-authentication-and-authorization.md
+          - ADR-0011 OpenSpec host install exception: documentation/adr/0011-openspec-host-install-exception.md
+  - Planning:
+      - planning/index.md
+      - Research:
+          - Competitive landscape & feasibility: planning/research/competitive-landscape.md
+  - Brainstorm:
+      - brainstorm/index.md
+      - V1 feature set: brainstorm/v1-feature-set.md
+  - Design: design/index.md

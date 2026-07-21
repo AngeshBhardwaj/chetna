@@ -1,0 +1,25 @@
+# docs (mkdocs)
+docs/site/
+docs/.cache/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+
+# local settings
+.claude/settings.*
+
+# gradle / kotlin / jvm
+apps/.gradle/
+apps/**/build/
+*.hprof
+
+# node (openspec)
+node_modules/
+
+# secrets
+.env
