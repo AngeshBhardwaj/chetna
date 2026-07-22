@@ -23,7 +23,7 @@ dependencies {
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")
     implementation(libs.temporal.sdk)
     implementation(libs.kotlinx.coroutines.core)
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+    implementation(libs.springdoc.openapi.webmvc.ui)
 
     runtimeOnly("org.postgresql:postgresql")
 
@@ -35,11 +35,11 @@ dependencies {
 
 testing {
     suites {
-        val test by getting(JvmTestSuite::class) {
+        val test = named<JvmTestSuite>("test") {
             useJUnitJupiter()
         }
 
-        val integrationTest by registering(JvmTestSuite::class) {
+        val integrationTest = register<JvmTestSuite>("integrationTest") {
             useJUnitJupiter()
             dependencies {
                 implementation(project())
@@ -63,7 +63,7 @@ testing {
             }
         }
 
-        val e2eTest by registering(JvmTestSuite::class) {
+        register<JvmTestSuite>("e2eTest") {
             useJUnitJupiter()
             dependencies {
                 implementation(project())
