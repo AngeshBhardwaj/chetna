@@ -1,14 +1,7 @@
-services:
-  docs:
-    build:
-      context: ./docs
-    volumes:
-      - ./docs:/docs
-    working_dir: /docs
-    ports:
-      - "8000:8000"
-    command: mkdocs serve -a 0.0.0.0:8000
+include:
+  - docs/compose.yaml
 
+services:
   postgres:
     image: postgres:15-alpine
     environment:
