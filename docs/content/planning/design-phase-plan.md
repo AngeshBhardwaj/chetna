@@ -10,7 +10,13 @@ Get brand identity, theme, iconography, and mockups for the v1 screen set in pla
 
 ### Seed color: deep indigo (`#4A4076`)
 
-Chosen over a muted teal (rejected — overlaps with the generic "calm/meditation app" look) and a dusty marigold (rejected — has to stay muted to avoid reading as an alert, trading away most of its warmth advantage to do so). Indigo reads as calm authority — a "thoughtful guardian" rather than an enforcer — without the corporate-blue genericness common in this app category, and sits into the soft-lock screen's ambient glow without announcing itself. This single value feeds into Material Theme Builder to generate the full Material 3 light+dark token set for `design/tokens/`.
+Chosen over a muted teal (rejected — overlaps with the generic "calm/meditation app" look) and a dusty marigold (rejected — has to stay muted to avoid reading as an alert, trading away most of its warmth advantage to do so). Indigo reads as calm authority — a "thoughtful guardian" rather than an enforcer — without the corporate-blue genericness common in this app category, and sits into the soft-lock screen's ambient glow without announcing itself. This single value feeds into `design/tokens/` to generate the full Material 3 light+dark token set.
+
+Note: the generated `primary` role (`#6151a6`) is not this seed hex — the seed is tone-mapping input to Google's HCT algorithm, not the output `primary` value. That's expected, correct M3 behavior; see `design/tokens/README.md`.
+
+### Shape scale: Balanced (bezel 22 · card 14 · button 20 · row 10)
+
+Chosen over Sharp (rejected — reads clinical/authoritative, closer to a monitoring-tool aesthetic than the calm tone the product wants) and Soft (rejected for now — leans hardest into the calm/non-punitive signal, but risked looking bubbly/toy-like on small elements; Balanced is the safer default to build the first mockups with). Closest to Material 3's out-of-the-box roundedness. Icon style follows: Rounded Material Symbols pairs with this over Outlined.
 
 ## Tooling and pipeline
 
@@ -19,7 +25,8 @@ Full reasoning and trade-offs are in [ADR-0013](../documentation/adr/0013-design
 | # | Step | Tool | Output | Where it lands |
 |---|---|---|---|---|
 | 0 (once) | Brand foundations — seed color(s), type scale, spacing | Decided once, hand-authored | Durable token values | `design/tokens/` |
-| 0 (once) | Real Android theme, generated from tokens | Google Material Theme Builder (or equivalent) | Kotlin `ColorScheme`/`Typography` | `apps/mobile/android` (once scaffolded) |
+| 0 (once) | Color scheme generated from the seed | `design/tokens/generate-scheme.mjs` (Node — see [ADR-0014](../documentation/adr/0014-design-token-generation-runtime.md) for why) | `generated/color-scheme.json` (M3 light+dark roles) | `design/tokens/generated/` |
+| 0 (once, later) | Real Android theme, from the generated scheme | Hand-wired once `apps/mobile/android` exists | Kotlin `ColorScheme`/`Typography` | `apps/mobile/android` (once scaffolded) |
 | 0 (once) | Prototype adapter theme + style guide + shared components | Hand-written, React + MUI | `theme.ts` (lossy MUI adapter), a style-guide screen, `<ScreenShell>`/`<SectionHeader>`/nav components | `design/prototype/` |
 | 1 | Custom graphics (only if a feature needs an icon/illustration beyond Material Symbols) | Penpot | SVG | `design/assets/` (durable — see below) |
 | 2 | Screen/flow mockup | React + MUI prototype, written directly as code | `.tsx` screen files reusing the theme + shared components | `design/prototype/src/screens/<feature>/` |
@@ -39,10 +46,10 @@ If using an AI image tool for logo/icon concepts (e.g. Recraft, notably vector/S
 ## What's still needed before Android development can start
 
 - [x] Brand seed color decided — deep indigo (`#4A4076`), see [Decisions](#decisions-so-far) above.
-- [ ] Type scale and spacing decided and written to `design/tokens/`.
+- [x] Shape scale decided — Balanced, see [Decisions](#decisions-so-far) above.
+- [x] Type scale, typeface, and spacing decided (Roboto, M3 default type scale unmodified, M3 default 8dp/4dp spacing — no customization needed) and written to `design/tokens/tokens.json`, alongside color and shape. The full Material 3 light+dark color scheme is generated from the seed at `design/tokens/generated/color-scheme.json` via `@material/material-color-utilities` (Google's own HCT algorithm — the same one Material Theme Builder wraps).
 - [ ] Style-guide screen and shared components (`<ScreenShell>`, `<SectionHeader>`, nav wrapper) built in `design/prototype/`.
-- [ ] Logo and any custom icons beyond Material Symbols designed in Penpot, exported SVGs committed to `design/assets/`.
-- [ ] Shape scale decided (sharp / balanced / soft) — see the [design-phase design work](../documentation/adr/0013-design-prototype-tooling.md) for the comparison; folds into `design/tokens/` alongside color.
+- [ ] Logo designed and placed in `design/assets/logo/`; no custom icons needed for now beyond Material Symbols.
 - [ ] Mockups for the v1 screen set (see [v1 feature set](../brainstorm/v1-feature-set.md)):
   - Onboarding age-group selection.
   - Toddler hand-over screen (novel — no existing design-system answer).
@@ -63,5 +70,6 @@ Carried forward from the [v1 feature set](../brainstorm/v1-feature-set.md), rele
 ## Related
 
 - [ADR-0013: Design prototype tooling](../documentation/adr/0013-design-prototype-tooling.md)
+- [ADR-0014: Design-token generation runtime](../documentation/adr/0014-design-token-generation-runtime.md)
 - [V1 feature set](../brainstorm/v1-feature-set.md)
 - [Design](../design/index.md)
