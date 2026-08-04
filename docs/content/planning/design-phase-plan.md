@@ -6,6 +6,12 @@
 
 Get brand identity, theme, iconography, and mockups for the v1 screen set in place *before* Android development starts, so the real Compose implementation isn't guessing at visual/UX decisions mid-build.
 
+## Decisions so far
+
+### Seed color: deep indigo (`#4A4076`)
+
+Chosen over a muted teal (rejected — overlaps with the generic "calm/meditation app" look) and a dusty marigold (rejected — has to stay muted to avoid reading as an alert, trading away most of its warmth advantage to do so). Indigo reads as calm authority — a "thoughtful guardian" rather than an enforcer — without the corporate-blue genericness common in this app category, and sits into the soft-lock screen's ambient glow without announcing itself. This single value feeds into Material Theme Builder to generate the full Material 3 light+dark token set for `design/tokens/`.
+
 ## Tooling and pipeline
 
 Full reasoning and trade-offs are in [ADR-0013](../documentation/adr/0013-design-prototype-tooling.md). Summary of the repeatable, per-feature process:
@@ -26,9 +32,14 @@ Key rule carried from ADR-0013: `design/prototype/` is disposable by design. Any
 
 Icons: Material Symbols (Google's current, actively-maintained set), not `@mui/icons-material` — confirmed via Google's own repo that the classic set it wraps stopped updating in 2022.
 
+### Logo/app-icon generation — licensing caveat
+
+If using an AI image tool for logo/icon concepts (e.g. Recraft, notably vector/SVG-capable, unlike most raster-only generators): free tiers on these tools commonly restrict commercial use and/or publish generated images in a public gallery — confirmed directly for Recraft's free plan, whose images are "not licensed for commercial use" and are made publicly visible. Fine for rough concept exploration, not sufficient for the final shipped logo. Before treating any AI-generated output as final, either upgrade to a licensed tier, or use it only as a reference to redraw/vectorize cleanly in Penpot, which carries no licensing ambiguity at all. Verify the specific tier's terms before finalizing, regardless of which tool is used.
+
 ## What's still needed before Android development can start
 
-- [ ] Brand seed color(s), type scale, and spacing decided and written to `design/tokens/`.
+- [x] Brand seed color decided — deep indigo (`#4A4076`), see [Decisions](#decisions-so-far) above.
+- [ ] Type scale and spacing decided and written to `design/tokens/`.
 - [ ] Style-guide screen and shared components (`<ScreenShell>`, `<SectionHeader>`, nav wrapper) built in `design/prototype/`.
 - [ ] Logo and any custom icons beyond Material Symbols designed in Penpot.
 - [ ] Mockups for the v1 screen set (see [v1 feature set](../brainstorm/v1-feature-set.md)):
