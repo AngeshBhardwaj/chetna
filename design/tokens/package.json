@@ -1,0 +1,13 @@
+{
+  "name": "chetna-design-tokens",
+  "private": true,
+  "type": "module",
+  "description": "Generates the Material 3 color scheme from design/tokens/tokens.json's seed color.",
+  "scripts": {
+    "postinstall": "node fix-material-color-utilities.mjs",
+    "generate": "node generate-scheme.mjs"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "0.4.0"
+  }
+}
