@@ -19,19 +19,22 @@
 2. Do the work, commit, push.
 3. Open a PR into `dev`. Must pass all required checks, get at least one approval (including a [Code Owner](.github/CODEOWNERS)), and have all conversations resolved.
 4. Once merged, the feature branch is auto-deleted.
-5. Periodically, once `dev` is in a releasable state, a maintainer opens a PR from `dev` into `main`. Same requirements apply.
-6. **After merging `dev` → `main`, resync `dev`** so it doesn't drift out of sync:
+5. Periodically, once `dev` is in a releasable state, a maintainer opens a PR from `dev` into `main`, merged with **"Create a merge commit"** (not squash, not rebase — see [Merge strategy](#merge-strategy)). Because `dev` is already squash-clean by this point, this doesn't add commit noise to `main` — it copies `dev`'s existing commits over unchanged and adds one merge commit. No new hashes, so `dev` and `main` share identical history immediately afterward — **no resync step needed.**
+
+   If a `dev` → `main` PR is ever merged via squash or rebase instead (by mistake, or because the setting drifted), `dev` will show as diverged from `main` ("N ahead, N behind"). Fix it the same way, without force-pushing (branch protection blocks that on `dev`, correctly):
    ```bash
    git checkout dev
    git fetch origin
    git merge origin/main -m "Merge main into dev to resync after squash/rebase merge"
    git push origin dev
    ```
-   This step is necessary, not optional: squash/rebase merges create new commits on `main` with different hashes than `dev`'s originals, even though the content is identical. Without resyncing, `dev` and `main` show as diverged ("N ahead, N behind") indefinitely. Use a real merge here, not `git reset --hard` + force-push — branch protection blocks force-pushes to `dev` (correctly), and a forward merge resolves the divergence without needing to bypass that. `dev` will show as ahead of `main` afterward (it now contains a merge commit `main` doesn't) — that's expected, not a problem; only "behind" indicates missing content.
+   `dev` will show as ahead of `main` afterward (it now has a merge commit `main` doesn't) — that's expected, not a problem; only "behind" indicates missing content.
 
 ## Merge strategy
 
-**Squash and merge only.** Every PR becomes a single, clean commit on the target branch — merge commits and unsquashed rebases are disabled at the repository level. Write a clear, descriptive PR title; it becomes the squashed commit's message.
+- **`feature/`/`fix/`/`chore/`/`docs/` → `dev`: squash and merge.** Every such PR becomes a single, clean commit on `dev` — keeps `dev`'s history one-commit-per-change. Write a clear, descriptive PR title; it becomes the squashed commit's message.
+- **`dev` → `main`: create a merge commit** (GitHub's "Create a merge commit" option, not squash or rebase). `dev`'s history is already squash-clean, so this doesn't reintroduce noise into `main` — it just copies `dev`'s existing commits over as-is (same hashes) plus one merge commit, which is what keeps `dev` and `main` from diverging.
+- Repo settings (`Settings → General → Pull Requests`) must allow both "Allow squash merging" and "Allow merge commits" — squash for feature branches, merge commit for the `dev` → `main` promotion specifically. "Allow rebase merging" should stay off; a rebase-merged `dev` → `main` PR causes the same divergence a squash does.
 
 ## Branch protection (enforced on both `main` and `dev`)
 
