@@ -24,10 +24,10 @@
    ```bash
    git checkout dev
    git fetch origin
-   git reset --hard origin/main
-   git push origin dev --force-with-lease
+   git merge origin/main -m "Merge main into dev to resync after squash/rebase merge"
+   git push origin dev
    ```
-   This step is necessary, not optional: squash/rebase merges create new commits on `main` with different hashes than `dev`'s originals, even though the content is identical. Without resyncing, `dev` and `main` show as diverged ("N ahead, N behind") indefinitely.
+   This step is necessary, not optional: squash/rebase merges create new commits on `main` with different hashes than `dev`'s originals, even though the content is identical. Without resyncing, `dev` and `main` show as diverged ("N ahead, N behind") indefinitely. Use a real merge here, not `git reset --hard` + force-push — branch protection blocks force-pushes to `dev` (correctly), and a forward merge resolves the divergence without needing to bypass that. `dev` will show as ahead of `main` afterward (it now contains a merge commit `main` doesn't) — that's expected, not a problem; only "behind" indicates missing content.
 
 ## Merge strategy
 
