@@ -41,8 +41,10 @@ nav:
           - ADR-0010 Authentication and authorization: documentation/adr/0010-authentication-and-authorization.md
           - ADR-0011 OpenSpec host install exception: documentation/adr/0011-openspec-host-install-exception.md
           - ADR-0012 Docs compose decoupling: documentation/adr/0012-docs-compose-decoupling.md
+          - ADR-0013 Design prototype tooling: documentation/adr/0013-design-prototype-tooling.md
   - Planning:
       - planning/index.md
+      - Design phase plan: planning/design-phase-plan.md
       - Research:
           - Competitive landscape & feasibility: planning/research/competitive-landscape.md
   - Brainstorm:
