@@ -48,7 +48,7 @@ If using an AI image tool for logo/icon concepts (e.g. Recraft, notably vector/S
 - [x] Brand seed color decided — deep indigo (`#4A4076`), see [Decisions](#decisions-so-far) above.
 - [x] Shape scale decided — Balanced, see [Decisions](#decisions-so-far) above.
 - [x] Type scale, typeface, and spacing decided (Roboto, M3 default type scale unmodified, M3 default 8dp/4dp spacing — no customization needed) and written to `design/tokens/tokens.json`, alongside color and shape. The full Material 3 light+dark color scheme is generated from the seed at `design/tokens/generated/color-scheme.json` via `@material/material-color-utilities` (Google's own HCT algorithm — the same one Material Theme Builder wraps).
-- [ ] Style-guide screen and shared components (`<ScreenShell>`, `<SectionHeader>`, nav wrapper) built in `design/prototype/`.
+- [x] Style-guide screen and shared components (`<ScreenShell>`, `<SectionHeader>`, `<NavRail>`) built in `design/prototype/`. Compiles, builds, and runs (dockerized, `docker compose -f design/prototype/compose.yaml up --build`, serving at `localhost:5173`) — see `design/prototype/README.md`.
 - [x] Logo designed and placed in `design/assets/logo/` (full lockup, icon-only, monochrome variants). No custom icons needed for now beyond Material Symbols.
 - [ ] Mockups for the v1 screen set (see [v1 feature set](../brainstorm/v1-feature-set.md)):
   - Onboarding age-group selection.
