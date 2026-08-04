@@ -21,14 +21,14 @@ Full reasoning and trade-offs are in [ADR-0013](../documentation/adr/0013-design
 | 0 (once) | Brand foundations — seed color(s), type scale, spacing | Decided once, hand-authored | Durable token values | `design/tokens/` |
 | 0 (once) | Real Android theme, generated from tokens | Google Material Theme Builder (or equivalent) | Kotlin `ColorScheme`/`Typography` | `apps/mobile/android` (once scaffolded) |
 | 0 (once) | Prototype adapter theme + style guide + shared components | Hand-written, React + MUI | `theme.ts` (lossy MUI adapter), a style-guide screen, `<ScreenShell>`/`<SectionHeader>`/nav components | `design/prototype/` |
-| 1 | Custom graphics (only if a feature needs an icon/illustration beyond Material Symbols) | Penpot | SVG | `design/prototype/src/assets/` |
+| 1 | Custom graphics (only if a feature needs an icon/illustration beyond Material Symbols) | Penpot | SVG | `design/assets/` (durable — see below) |
 | 2 | Screen/flow mockup | React + MUI prototype, written directly as code | `.tsx` screen files reusing the theme + shared components | `design/prototype/src/screens/<feature>/` |
 | 3 | Review | Browser (`npm run dev`) | Feedback, iterated in place | same files |
 | 4 | "Export" | None — it's already committed code | — | — |
 | 5 | Build plan | Written once a screen is approved | Implementation plan referencing the approved mockup | `docs/content/planning/` or an OpenSpec change |
 | 6 | Real build | Jetpack Compose | Production Kotlin code | `apps/mobile/android` |
 
-Key rule carried from ADR-0013: `design/prototype/` is disposable by design. Anything load-bearing — the tokens, and the visual record of any *approved* screen a later build plan cites — must live outside it (e.g. as exported PNGs kept alongside this plan, not only as live prototype code).
+Key rule carried from ADR-0013: `design/prototype/` is disposable by design. Anything load-bearing — the tokens, the logo/custom icon SVGs, and the visual record of any *approved* screen a later build plan cites — must live outside it. Tokens live in `design/tokens/`; logo and custom icons live in `design/assets/` (see its `README.md`); approved-screen records are kept as exported images alongside this plan, not only as live prototype code.
 
 Icons: Material Symbols (Google's current, actively-maintained set), not `@mui/icons-material` — confirmed via Google's own repo that the classic set it wraps stopped updating in 2022.
 
@@ -41,7 +41,8 @@ If using an AI image tool for logo/icon concepts (e.g. Recraft, notably vector/S
 - [x] Brand seed color decided — deep indigo (`#4A4076`), see [Decisions](#decisions-so-far) above.
 - [ ] Type scale and spacing decided and written to `design/tokens/`.
 - [ ] Style-guide screen and shared components (`<ScreenShell>`, `<SectionHeader>`, nav wrapper) built in `design/prototype/`.
-- [ ] Logo and any custom icons beyond Material Symbols designed in Penpot.
+- [ ] Logo and any custom icons beyond Material Symbols designed in Penpot, exported SVGs committed to `design/assets/`.
+- [ ] Shape scale decided (sharp / balanced / soft) — see the [design-phase design work](../documentation/adr/0013-design-prototype-tooling.md) for the comparison; folds into `design/tokens/` alongside color.
 - [ ] Mockups for the v1 screen set (see [v1 feature set](../brainstorm/v1-feature-set.md)):
   - Onboarding age-group selection.
   - Toddler hand-over screen (novel — no existing design-system answer).
