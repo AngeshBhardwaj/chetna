@@ -21,5 +21,12 @@ apps/**/build/
 # node (openspec)
 node_modules/
 
+# node (design prototype)
+design/prototype/dist/
+design/prototype/*.tsbuildinfo
+design/prototype/vite.config.js
+design/prototype/vite.config.d.ts
+design/prototype/debug/
+
 # secrets
 .env
