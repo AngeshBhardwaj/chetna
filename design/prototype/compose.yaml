@@ -1,0 +1,13 @@
+services:
+  design-prototype:
+    build:
+      context: ..
+      dockerfile: prototype/Dockerfile
+    volumes:
+      - ..:/design
+      - design-prototype-node-modules:/design/prototype/node_modules
+    ports:
+      - "5173:5173"
+
+volumes:
+  design-prototype-node-modules:

@@ -1,0 +1,27 @@
+{
+  "name": "chetna-design-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Throwaway high-fidelity mockup app — see docs/content/documentation/adr/0013-design-prototype-tooling.md. Never shipped; the real app is Kotlin/Compose per ADR-0003.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "@mui/material": "9.2.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.2",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "6.0.5",
+    "typescript": "7.0.2",
+    "vite": "8.2.0"
+  }
+}
