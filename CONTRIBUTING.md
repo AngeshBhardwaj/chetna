@@ -35,6 +35,7 @@
 - **`feature/`/`fix/`/`chore/`/`docs/` → `dev`: squash and merge.** Every such PR becomes a single, clean commit on `dev` — keeps `dev`'s history one-commit-per-change. Write a clear, descriptive PR title; it becomes the squashed commit's message.
 - **`dev` → `main`: create a merge commit** (GitHub's "Create a merge commit" option, not squash or rebase). `dev`'s history is already squash-clean, so this doesn't reintroduce noise into `main` — it just copies `dev`'s existing commits over as-is (same hashes) plus one merge commit, which is what keeps `dev` and `main` from diverging.
 - Repo settings (`Settings → General → Pull Requests`) must allow both "Allow squash merging" and "Allow merge commits" — squash for feature branches, merge commit for the `dev` → `main` promotion specifically. "Allow rebase merging" should stay off; a rebase-merged `dev` → `main` PR causes the same divergence a squash does.
+- `main` additionally has this enforced by rule, not just convention: a [ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets) targeting `main`, under "Require a pull request before merging," restricts "Allowed merge methods" to **Merge** only — squash/rebase aren't selectable in the merge button for PRs into `main` at all.
 
 ## Branch protection (enforced on both `main` and `dev`)
 
@@ -43,6 +44,7 @@
 - All required status checks (CI workflows) must pass.
 - All PR conversations must be resolved.
 - The branch must be up to date with its target before merging.
+- `main` only: the `enforce-main-source` workflow (`.github/workflows/enforce-main-source.yml`) is a required status check that fails unless the PR's source branch is `dev` — GitHub has no native "restrict PR source branch" rule, so this is the workaround. It can't stop a PR from being *opened* against `main` from elsewhere, only from being merged.
 
 ## Documentation discipline
 
