@@ -24,3 +24,4 @@ An ADR captures a single architecturally-significant decision: what we chose, wh
 | [0010](0010-authentication-and-authorization.md) | Authentication & authorization — phone+OTP login, device pairing, JWT via Spring Security | Accepted |
 | [0011](0011-openspec-host-install-exception.md) | OpenSpec/Node installed natively on the host — exception to ADR-0002 | Accepted |
 | [0012](0012-docs-compose-decoupling.md) | Docs site gets its own standalone compose file | Accepted |
+| [0013](0013-design-prototype-tooling.md) | Design prototype tooling — durable tokens vs. throwaway MUI mockup app | Accepted |
