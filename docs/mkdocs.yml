@@ -5,6 +5,8 @@ site_dir: site
 
 theme:
   name: material
+  logo: assets/logo/chetna-logo-icon-mark-white.svg
+  favicon: assets/logo/chetna-logo-icon-mark-color.svg
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -51,4 +53,5 @@ nav:
   - Brainstorm:
       - brainstorm/index.md
       - V1 feature set: brainstorm/v1-feature-set.md
+      - Onboarding domain story: brainstorm/onboarding-domain-story.md
   - Design: design/index.md
