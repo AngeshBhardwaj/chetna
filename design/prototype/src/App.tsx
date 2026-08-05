@@ -2,7 +2,7 @@ import { AppBar, Box, CssBaseline, ThemeProvider, Toolbar, Typography } from "@m
 import { theme } from "./theme";
 import { NavRail } from "./shared/NavRail";
 import { StyleGuide } from "./screens/StyleGuide";
-import logoIcon from "../../assets/logo/chetna_icon_color.svg";
+import logoIcon from "../../assets/logo/chetna-logo-icon-mark-color.svg";
 
 export function App() {
   return (

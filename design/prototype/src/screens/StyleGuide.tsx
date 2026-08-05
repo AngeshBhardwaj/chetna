@@ -3,9 +3,9 @@ import { ScreenShell } from "../shared/ScreenShell";
 import { SectionHeader } from "../shared/SectionHeader";
 import colorScheme from "../../../tokens/generated/color-scheme.json";
 import tokens from "../../../tokens/tokens.json";
-import logoFull from "../../../assets/logo/chetna_full_horizontal_color.svg";
-import logoIcon from "../../../assets/logo/chetna_icon_color.svg";
-import logoMono from "../../../assets/logo/chetna_icon_bnw.svg";
+import logoFull from "../../../assets/logo/chetna-logo-full-horizontal-color.svg";
+import logoIcon from "../../../assets/logo/chetna-logo-icon-mark-color.svg";
+import logoMono from "../../../assets/logo/chetna-logo-icon-mark-black.svg";
 
 const swatchRoles: Array<keyof typeof colorScheme.light> = [
   "primary",
