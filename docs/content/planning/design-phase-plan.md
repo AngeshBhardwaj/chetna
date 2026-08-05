@@ -30,10 +30,12 @@ Full reasoning and trade-offs are in [ADR-0013](../documentation/adr/0013-design
 | 0 (once) | Prototype adapter theme + style guide + shared components | Hand-written, React + MUI | `theme.ts` (lossy MUI adapter), a style-guide screen, `<ScreenShell>`/`<SectionHeader>`/nav components | `design/prototype/` |
 | 1 | Custom graphics (only if a feature needs an icon/illustration beyond Material Symbols) | Penpot | SVG | `design/assets/` (durable — see below) |
 | 2 | Screen/flow mockup | React + MUI prototype, written directly as code | `.tsx` screen files reusing the theme + shared components | `design/prototype/src/screens/<feature>/` |
-| 3 | Review | Browser (`npm run dev`) | Feedback, iterated in place | same files |
+| 3 | Review | Browser (`npm run dev`), screenshotted via headless browser in Docker | Feedback, iterated in place | same files |
 | 4 | "Export" | None — it's already committed code | — | — |
 | 5 | Build plan | Written once a screen is approved | Implementation plan referencing the approved mockup | `docs/content/planning/` or an OpenSpec change |
 | 6 | Real build | Jetpack Compose | Production Kotlin code | `apps/mobile/android` |
+
+**Standing rule for step 3, whenever an external reference exists** (`design/prototype/reference/<feature>/` — screenshots/exports from another tool or designer): before calling a screen done, do an explicit side-by-side check against that reference — button widths, header type scale, spacing, which patterns it uses (icon badges, selection rows, boxed OTP, etc.) — not just "does this look reasonable on its own." Added after two rounds in the Chunk 1 (Welcome + Auth) build where drift (inconsistent button widths, an oversized in-flow header, a missing boxed-OTP pattern) only surfaced because the user caught it against the reference after the fact, not because a build-time check did. A prototype screen with no external reference still just gets the ordinary browser review in step 3.
 
 Key rule carried from ADR-0013: `design/prototype/` is disposable by design. Anything load-bearing — the tokens, the logo/custom icon SVGs, and the visual record of any *approved* screen a later build plan cites — must live outside it. Tokens live in `design/tokens/`; logo and custom icons live in `design/assets/` (see its `README.md`); approved-screen records are kept as exported images alongside this plan, not only as live prototype code.
 
