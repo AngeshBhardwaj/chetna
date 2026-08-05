@@ -1,5 +1,6 @@
 services:
   design-prototype:
+    container_name: chetna-prototype-webapp
     build:
       context: ..
       dockerfile: prototype/Dockerfile
