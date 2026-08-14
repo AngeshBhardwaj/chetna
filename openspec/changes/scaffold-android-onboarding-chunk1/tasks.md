@@ -61,7 +61,7 @@
 ## 9. CI
 
 - [x] 9.1 Add `.github/workflows/android.yml`, triggered on changes under `apps/domains/**` or `apps/mobile/android/**`, running directly on `ubuntu-latest` (GitHub-hosted runners ship a preinstalled Android SDK — do not use a bare `gradle:*-jdk21` container, which has none and fails `assembleDebug` immediately) — steps: `:mobile:android:testDebugUnitTest`, `:mobile:android:assembleDebug`, and `:backend:build` (confirming the domain modules' new Android target hasn't broken backend's consumption of them). `androidTest` stays local-only per `design.md`'s Non-Goals. Matches `docs.yml`'s shape (path-filtered push + `pull_request` + `workflow_dispatch`). Runs `./gradlew` directly on the runner, not via `apps/gradlew-docker` — this machine's containerization need doesn't apply to `ubuntu-latest`.
-- [ ] 9.2 Verify the workflow passes on a real push to the change's branch before considering CI done. **Blocked on user action**: needs an actual `git push` to trigger real GitHub Actions execution — a shared/visible action, not taken without asking. Deferred to when the branch is actually pushed/PR'd.
+- [x] 9.2 Verify the workflow passes on a real push to the change's branch before considering CI done. First real run failed: `./gradlew: Permission denied` — `apps/gradlew` (and `apps/gradlew-docker`, `apps/mobile/android/emulator/entrypoint.sh`) had never been committed with the executable bit set, so GitHub Actions' checkout preserved the non-executable mode from git. Fixed via `git update-index --chmod=+x`. Re-ran clean on the PR to `dev`.
 
 ## 10. Cross-cutting verification
 
