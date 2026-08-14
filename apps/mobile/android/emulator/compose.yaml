@@ -1,0 +1,19 @@
+services:
+  chetna-android-emulator:
+    build: .
+    container_name: chetna-android-emulator
+    devices:
+      - /dev/kvm
+    volumes:
+      # Persists the AVD (created on first start, not baked into the image —
+      # see design.md's AVD decision) across container restarts.
+      - chetna-android-avd:/root/.android
+      # Repo + Gradle cache — connectedAndroidTest runs via `docker exec`
+      # into this container (see design.md), not a separate build container.
+      - ../../../..:/workspace
+      - chetna-gradle-cache:/root/.gradle
+
+volumes:
+  chetna-android-avd:
+  chetna-gradle-cache:
+    external: true
