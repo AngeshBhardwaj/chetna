@@ -1,0 +1,42 @@
+name: android
+
+on:
+  push:
+    branches: [dev, main]
+    paths:
+      - "apps/domains/**"
+      - "apps/mobile/android/**"
+      - "apps/gradle/**"
+      - ".github/workflows/android.yml"
+  pull_request:
+    paths:
+      - "apps/domains/**"
+      - "apps/mobile/android/**"
+      - "apps/gradle/**"
+      - ".github/workflows/android.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # GitHub-hosted ubuntu-latest runners ship a preinstalled Android SDK
+      # (unlike this dev machine, which has no host JDK at all — see
+      # ADR-0015) — ./gradlew runs directly, not via apps/gradlew-docker.
+      - name: Verify backend still builds against the Android-targeted domain modules
+        working-directory: apps
+        run: ./gradlew :backend:build -x test -x integrationTest
+
+      - name: Run Android unit tests
+        working-directory: apps
+        run: ./gradlew :mobile:android:testDebugUnitTest
+
+      - name: Assemble debug APK
+        working-directory: apps
+        run: ./gradlew :mobile:android:assembleDebug
+
+      # androidTest (instrumented) stays local-only against the Dockerized
+      # emulator — an emulator/device runner in CI is real cost/complexity
+      # out of scope for this change (design.md's Non-Goals).
