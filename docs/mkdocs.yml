@@ -45,6 +45,8 @@ nav:
           - ADR-0012 Docs compose decoupling: documentation/adr/0012-docs-compose-decoupling.md
           - ADR-0013 Design prototype tooling: documentation/adr/0013-design-prototype-tooling.md
           - ADR-0014 Design token generation runtime: documentation/adr/0014-design-token-generation-runtime.md
+          - ADR-0015 Android app architecture: documentation/adr/0015-android-app-architecture.md
+          - ADR-0016 Play Store distribution strategy: documentation/adr/0016-play-store-distribution-strategy.md
   - Planning:
       - planning/index.md
       - Design phase plan: planning/design-phase-plan.md
