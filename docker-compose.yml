@@ -1,6 +1,7 @@
 include:
   - docs/compose.yaml
   - design/prototype/compose.yaml
+  - apps/mobile/android/emulator/compose.yaml
 
 services:
   postgres:

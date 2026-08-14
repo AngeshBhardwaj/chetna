@@ -14,9 +14,18 @@ __pycache__/
 .claude/settings.*
 
 # gradle / kotlin / jvm
-apps/.gradle/
+apps/**/.gradle/
+apps/**/.kotlin/
 apps/**/build/
 *.hprof
+
+# android local (machine-specific SDK path / future release-signing secrets —
+# never committed; see apps/mobile/android/keystore.properties.example once
+# release signing exists)
+local.properties
+apps/mobile/android/keystore.properties
+*.jks
+*.keystore
 
 # node (openspec)
 node_modules/
@@ -30,3 +39,6 @@ design/prototype/debug/
 
 # secrets
 .env
+
+# shared design reference material, not durable project content
+design/prototype/reference/onboarding/welcome-and-auth/project-html/

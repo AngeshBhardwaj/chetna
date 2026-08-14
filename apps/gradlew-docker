@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Runs ./gradlew inside a container with JDK + Android SDK preinstalled, since
+# this machine (like every other machine this repo assumes) has no host JVM
+# toolchain — see ADR-0015 "Android SDK + JDK provisioning" and
+# apps/backend/Dockerfile, which builds the backend's own Kotlin/JVM code the
+# same way. Do not add a host JDK/Android SDK install as an alternative to
+# this script; that decision was already reversed once during this repo's
+# history for a documented reason.
+set -euo pipefail
+
+IMAGE="${CHETNA_ANDROID_BUILD_IMAGE:-saschpe/android-emulator:35-jdk23.0.2_7}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# --user root: the image's default `nonroot` user (uid 1001) can't write to a
+# freshly created Docker volume, and there's no meaningful isolation benefit
+# from staying non-root in an ephemeral, per-invocation build container that
+# only ever mounts this repo's own checkout.
+# connectedAndroidTest doesn't run through this script — AGP's device
+# discovery ignores a remote adb server, so it runs via `docker exec` into
+# the emulator's own container instead (see emulator/compose.yaml).
+exec docker run --rm \
+  -v "${REPO_ROOT}:/workspace" \
+  -v chetna-gradle-cache:/root/.gradle \
+  -w /workspace/apps \
+  -e ANDROID_HOME=/opt/android-sdk-linux \
+  --user root \
+  "$IMAGE" ./gradlew "$@"
