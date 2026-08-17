@@ -13,12 +13,16 @@ context: |
   Architecture: Clean Architecture + DDD, modular monolith to start (ADR-0004).
   Bounded contexts live under apps/domains/: consent, enforcement, credits,
   device. Mobile is Kotlin Multiplatform with native UI per platform (ADR-0003)
-  — Android v1 (Kotlin/Compose), iOS phase 2 (Swift/SwiftUI). Backend is
+  — Android v1 (Kotlin/Compose, Navigation-Compose + Hilt, single Gradle
+  module, generated theme — ADR-0015), iOS phase 2 (Swift/SwiftUI). Backend is
   Kotlin/JVM on Spring Boot (ADR-0005), PostgreSQL, REST + OpenAPI, RFC 7807
   errors. Temporal for workflow orchestration, RabbitMQ as the event bus from
-  day one (ADR-0006). Auth is phone+OTP login plus device pairing for child
-  devices, plain JWT via Spring Security, no separate OAuth2 Authorization
-  Server (ADR-0010). Observability via OpenTelemetry + self-hosted
+  day one (ADR-0006). Auth is email+OTP login (v1 default; phone/SMS shown as
+  "Coming soon", cost-driven) plus device pairing for child devices, plain JWT
+  via Spring Security, no separate OAuth2 Authorization Server (ADR-0010).
+  Play Store distribution targets adults/guardians, not children, with a
+  local-sideload -> internal -> closed -> production rollout ladder
+  (ADR-0016). Observability via OpenTelemetry + self-hosted
   Grafana/Loki/Tempo/Prometheus, with trace-ID correlation across HTTP,
   Temporal, and RabbitMQ (ADR-0009).
 

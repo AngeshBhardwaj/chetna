@@ -1,3 +1,19 @@
+pluginManagement {
+    includeBuild("build-logic")
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 rootProject.name = "chetna"
 
 include(
@@ -6,4 +22,5 @@ include(
     ":domains:credits",
     ":domains:device",
     ":backend",
+    ":mobile:android",
 )

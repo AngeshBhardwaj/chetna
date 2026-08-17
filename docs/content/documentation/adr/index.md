@@ -21,8 +21,10 @@ An ADR captures a single architecturally-significant decision: what we chose, wh
 | [0007](0007-web-frontend-stack.md) | Web frontend stack — React + TypeScript | Accepted |
 | [0008](0008-mobile-design-system.md) | Mobile design system — platform-native + custom brand theme | Accepted |
 | [0009](0009-observability.md) | Observability — structured logging, trace correlation, dashboards & alerting | Accepted |
-| [0010](0010-authentication-and-authorization.md) | Authentication & authorization — phone+OTP login, device pairing, JWT via Spring Security | Accepted |
+| [0010](0010-authentication-and-authorization.md) | Authentication & authorization — email+OTP login, device pairing, JWT via Spring Security | Accepted |
 | [0011](0011-openspec-host-install-exception.md) | OpenSpec/Node installed natively on the host — exception to ADR-0002 | Accepted |
 | [0012](0012-docs-compose-decoupling.md) | Docs site gets its own standalone compose file | Accepted |
 | [0013](0013-design-prototype-tooling.md) | Design prototype tooling — durable tokens vs. throwaway MUI mockup app | Accepted |
 | [0014](0014-design-token-generation-runtime.md) | Design-token color generation runs on Node, not Kotlin | Accepted |
+| [0015](0015-android-app-architecture.md) | Android app module architecture — Navigation-Compose, Hilt, generated theme | Accepted |
+| [0016](0016-play-store-distribution-strategy.md) | Play Store distribution & target-audience strategy | Accepted |
