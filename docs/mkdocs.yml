@@ -47,6 +47,8 @@ nav:
           - ADR-0014 Design token generation runtime: documentation/adr/0014-design-token-generation-runtime.md
           - ADR-0015 Android app architecture: documentation/adr/0015-android-app-architecture.md
           - ADR-0016 Play Store distribution strategy: documentation/adr/0016-play-store-distribution-strategy.md
+          - ADR-0017 Identity/Guardianship domain boundary: documentation/adr/0017-identity-guardianship-domain-boundary.md
+          - ADR-0018 Transactional email delivery: documentation/adr/0018-transactional-email-delivery.md
   - Planning:
       - planning/index.md
       - Design phase plan: planning/design-phase-plan.md
@@ -56,4 +58,5 @@ nav:
       - brainstorm/index.md
       - V1 feature set: brainstorm/v1-feature-set.md
       - Onboarding domain story: brainstorm/onboarding-domain-story.md
+      - Guardian identity domain story: brainstorm/guardian-identity-domain-story.md
   - Design: design/index.md

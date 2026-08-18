@@ -28,3 +28,5 @@ An ADR captures a single architecturally-significant decision: what we chose, wh
 | [0014](0014-design-token-generation-runtime.md) | Design-token color generation runs on Node, not Kotlin | Accepted |
 | [0015](0015-android-app-architecture.md) | Android app module architecture — Navigation-Compose, Hilt, generated theme | Accepted |
 | [0016](0016-play-store-distribution-strategy.md) | Play Store distribution & target-audience strategy | Accepted |
+| [0017](0017-identity-guardianship-domain-boundary.md) | Identity/Guardianship as its own bounded context, separate from Consent | Accepted |
+| [0018](0018-transactional-email-delivery.md) | Transactional email delivery — SMTP port/adapter, no hardcoded provider or domain | Accepted |
