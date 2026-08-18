@@ -2,6 +2,8 @@
 
 An app to help Indian parents get their children's screen time under control — not just track it, but actively enforce it.
 
+Built and maintained by [Softarch](https://softarch.in) and contributors, open-source under the [MIT License](LICENSE).
+
 ## Repository layout
 
 - `apps/` — application code (mobile, backend, web). Backend and Android scaffolded; iOS/web not yet.
